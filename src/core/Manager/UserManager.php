@@ -15,8 +15,8 @@ namespace Omed\User\Core\Manager;
 
 use Omed\User\Contracts\Manager\UserManagerInterface;
 use Omed\User\Contracts\Model\UserInterface;
-use Omed\User\Contracts\Updater\CanonicalFieldsUpdaterInterface;
-use Omed\User\Contracts\Updater\PasswordUpdaterInterface;
+use Omed\User\Contracts\Util\CanonicalFieldsUpdaterInterface;
+use Omed\User\Contracts\Util\PasswordUpdaterInterface;
 
 abstract class UserManager implements UserManagerInterface
 {

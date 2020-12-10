@@ -11,15 +11,11 @@
 
 declare(strict_types=1);
 
-namespace Omed\User\Contracts\Updater;
+namespace Omed\User\Contracts\Util;
 
 use Omed\User\Contracts\Model\UserInterface;
 
-interface CanonicalFieldsUpdaterInterface
+interface PasswordUpdaterInterface
 {
-    public function canonicalizeUsername(string $username): string;
-
-    public function canonicalizeMail(string $email): string;
-
-    public function updateCanonicalFields(UserInterface $user): void;
+    public function hashPassword(UserInterface $user): void;
 }

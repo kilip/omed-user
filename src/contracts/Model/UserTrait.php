@@ -29,6 +29,11 @@ trait UserTrait
 
     protected ?string $plainPassword = null;
 
+    public function eraseCredentials(): void
+    {
+        $this->plainPassword = null;
+    }
+
     public function getUsername(): ?string
     {
         return $this->username;

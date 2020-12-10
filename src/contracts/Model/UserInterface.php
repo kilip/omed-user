@@ -42,4 +42,6 @@ interface UserInterface extends \Serializable
     public function setPlainPassword(string $plainPassword): self;
 
     public function getPlainPassword(): ?string;
+
+    public function eraseCredentials(): void;
 }

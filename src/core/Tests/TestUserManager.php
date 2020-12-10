@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace Omed\User\Core\Tests;
 
 use Omed\User\Contracts\Model\UserInterface;
-use Omed\User\Contracts\Updater\CanonicalFieldsUpdaterInterface;
-use Omed\User\Contracts\Updater\PasswordUpdaterInterface;
+use Omed\User\Contracts\Util\CanonicalFieldsUpdaterInterface;
+use Omed\User\Contracts\Util\PasswordUpdaterInterface;
 use Omed\User\Core\Manager\UserManager;
 
 final class TestUserManager extends UserManager
