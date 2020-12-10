@@ -1,0 +1,32 @@
+{
+    "name": "omed/user",
+    "description": "Mezzio User managed by Doctrine",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Anthonius Munthi",
+            "email": "me@itstoni.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "config": {
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "Omed\\User\\Component\\": "./src/component",
+            "Omed\\User\\Contracts\\": "./src/contracts",
+            "Omed\\User\\Mezzio\\": "./src/mezzio"
+        }
+    },
+    "require": {
+        "php": ">=7.4"
+    },
+    "require-dev": {
+        "doctrine/mongodb-odm": "^2.1",
+        "doctrine/orm": "^2.8",
+        "phpspec/prophecy-phpunit": "^2.0",
+        "phpunit/phpunit": "^9.5"
+    }
+}
