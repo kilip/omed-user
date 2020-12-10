@@ -98,7 +98,7 @@ class UserManagerTest extends TestCase
 
     public function testFindByEmail()
     {
-        $email = 'test@example.com';
+        $email    = 'test@example.com';
         $user     = $this->prophesize(UserInterface::class)->reveal();
 
         $this->canonicalUpdater->canonicalizeMail($email)
@@ -149,7 +149,6 @@ class UserManagerTest extends TestCase
             $user,
             $this->getTarget()->findByUsernameOrEmail('username')
         );
-
     }
 
     public function testUpdateCanonicalFields()

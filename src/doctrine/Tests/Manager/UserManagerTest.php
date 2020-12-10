@@ -15,10 +15,10 @@ namespace Omed\User\Doctrine\Tests\Manager;
 
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Persistence\ObjectRepository;
-use Omed\User\Core\Tests\TestUserComponent;
 use Omed\User\Contracts\Model\UserInterface;
 use Omed\User\Contracts\Updater\CanonicalFieldsUpdaterInterface;
 use Omed\User\Contracts\Updater\PasswordUpdaterInterface;
+use Omed\User\Core\Tests\TestUserComponent;
 use Omed\User\Doctrine\Manager\UserManager;
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;

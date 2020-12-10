@@ -34,7 +34,9 @@
         "test": "phpunit"
     },
     "require": {
-        "php": ">=7.4"
+        "php": "^7.4|^8.0",
+        "ext-json": "*",
+        "ext-mbstring": "*"
     },
     "require-dev": {
         "doctrine/mongodb-odm": "^2.1",
