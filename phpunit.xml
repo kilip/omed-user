@@ -15,6 +15,7 @@
         <whitelist>
             <directory>./src</directory>
             <exclude>
+                <directory>./src/contracts</directory>
                 <directory>./src/*/Tests</directory>
             </exclude>
         </whitelist>

@@ -7,31 +7,31 @@ namespace Omed\User\Contracts\Model;
 
 interface UserInterface extends \Serializable
 {
-    public function getUsername();
+    public function getUsername(): ?string;
 
-    public function setUsername(string $username);
+    public function setUsername(string $username): self;
 
-    public function setUsernameCanonical(string $usernameCanonical);
+    public function setUsernameCanonical(string $usernameCanonical): self;
 
     public function getUsernameCanonical(): ?string;
 
-    public function setEmail(string $email);
+    public function setEmail(string $email): self;
 
     public function getEmail(): ?string;
 
-    public function setEmailCanonical(string $emailCanonical);
+    public function setEmailCanonical(string $emailCanonical): self;
 
     public function getEmailCanonical(): ?string;
 
-    public function setSalt(string $salt);
+    public function setSalt(string $salt): self;
 
     public function getSalt(): ?string;
 
-    public function setPassword(string $password);
+    public function setPassword(string $password): self;
 
     public function getPassword(): ?string;
 
-    public function setPlainPassword(string $plainPassword);
+    public function setPlainPassword(string $plainPassword): self;
 
     public function getPlainPassword(): ?string;
 }

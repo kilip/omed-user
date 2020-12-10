@@ -13,7 +13,7 @@ class TestUserComponent implements UserInterface
 {
     use UserTrait;
 
-    protected string $id;
+    protected ?string $id = null;
 
     /**
      * {@inheritdoc}
@@ -49,7 +49,7 @@ class TestUserComponent implements UserInterface
             ) = $data;
     }
 
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->id;
     }

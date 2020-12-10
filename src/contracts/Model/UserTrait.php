@@ -7,19 +7,19 @@ namespace Omed\User\Contracts\Model;
 
 trait UserTrait
 {
-    protected ?string $username;
+    protected ?string $username = null;
 
-    protected ?string $usernameCanonical;
+    protected ?string $usernameCanonical = null;
 
-    protected ?string $email;
+    protected ?string $email = null;
 
-    protected ?string $emailCanonical;
+    protected ?string $emailCanonical = null;
 
-    protected ?string $salt;
+    protected ?string $salt = null;
 
-    protected ?string $password;
+    protected ?string $password = null;
 
-    protected ?string $plainPassword;
+    protected ?string $plainPassword = null;
 
     public function getUsername(): ?string
     {

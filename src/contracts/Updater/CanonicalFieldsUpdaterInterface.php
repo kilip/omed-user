@@ -12,5 +12,5 @@ interface CanonicalFieldsUpdaterInterface
 
     public function canonicalizeMail(string $email): string;
 
-    public function updateCanonicalFields(UserInterface $user);
+    public function updateCanonicalFields(UserInterface $user): void;
 }

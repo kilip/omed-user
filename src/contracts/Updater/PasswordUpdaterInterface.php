@@ -9,5 +9,5 @@ use Omed\User\Contracts\Model\UserInterface;
 
 interface PasswordUpdaterInterface
 {
-    public function hashPassword(UserInterface $user);
+    public function hashPassword(UserInterface $user): void;
 }

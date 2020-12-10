@@ -7,5 +7,5 @@ namespace Omed\User\Contracts;
 
 interface ConfigurationInterface
 {
-    public function getUserClass();
+    public function getUserClass(): string;
 }

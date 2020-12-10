@@ -17,8 +17,19 @@
         "psr-4": {
             "Omed\\User\\Component\\": "./src/component",
             "Omed\\User\\Contracts\\": "./src/contracts",
+            "Omed\\User\\Doctrine\\": "./src/doctrine",
             "Omed\\User\\Mezzio\\": "./src/mezzio"
         }
+    },
+    "scripts": {
+        "check": [
+            "@psalm",
+            "@phpstan",
+            "@test"
+        ],
+        "phpstan": "./vendor/bin/phpstan analyse",
+        "psalm": "psalm --shepherd --stats",
+        "test": "phpunit"
     },
     "require": {
         "php": ">=7.4"
@@ -26,7 +37,14 @@
     "require-dev": {
         "doctrine/mongodb-odm": "^2.1",
         "doctrine/orm": "^2.8",
+        "jangregor/phpstan-prophecy": "^0.8.1",
         "phpspec/prophecy-phpunit": "^2.0",
-        "phpunit/phpunit": "^9.5"
+        "phpstan/extension-installer": "^1.0",
+        "phpstan/phpstan": "^0.12.59",
+        "phpstan/phpstan-doctrine": "^0.12.25",
+        "phpstan/phpstan-phpunit": "^0.12.16",
+        "phpunit/phpunit": "^9.5",
+        "psalm/plugin-phpunit": "^0.14.0",
+        "vimeo/psalm": "^4.3"
     }
 }
