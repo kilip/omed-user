@@ -11,12 +11,21 @@
 
 declare(strict_types=1);
 
-namespace Omed\User\Core\Model;
+namespace Omed\User\Mezzio\Tests\Unit;
 
 use Omed\User\Contracts\Model\UserInterface;
 use Omed\User\Contracts\Model\UserTrait;
 
-abstract class User implements UserInterface
+class TestUser implements UserInterface
 {
     use UserTrait;
+
+    public function serialize()
+    {
+        return '';
+    }
+
+    public function unserialize($serialized)
+    {
+    }
 }

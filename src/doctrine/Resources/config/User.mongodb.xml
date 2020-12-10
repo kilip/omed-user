@@ -4,7 +4,7 @@
                         xsi:schemaLocation="http://doctrine-project.org/schemas/odm/doctrine-mongo-mapping
                         http://doctrine-project.org/schemas/odm/doctrine-mongo-mapping.xsd">
 
-    <mapped-superclass name="Doyo\User\Component\Model\User" collection="doyo_user">
+    <mapped-superclass name="Omed\User\Doctrine\Model\User" collection="omed_user">
 
         <field name="username" type="string" />
 

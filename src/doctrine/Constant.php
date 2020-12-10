@@ -11,9 +11,17 @@
 
 declare(strict_types=1);
 
-namespace Omed\User\Contracts\Util;
+namespace Omed\User\Doctrine;
 
-interface EncoderInterface
+class Constant
 {
-    public function encodePassword(string $plainPassword, ?string $salt): string;
+    public static function getModelConfigDir()
+    {
+        return realpath(__DIR__.'/Resources/config');
+    }
+
+    public static function getModelNamespace()
+    {
+        return __NAMESPACE__.'\\Model';
+    }
 }

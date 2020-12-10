@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<phpunit
-        bootstrap="./vendor/autoload.php"
-        colors="true"
->
-
-    <testsuites>
-        <testsuite name="Omed User Test Suite">
-            <directory suffix="Test.php">./src/*/Tests</directory>
-        </testsuite>
-    </testsuites>
-
-    <filter>
-        <whitelist>
-            <directory>./src</directory>
-            <exclude>
-                <directory>./src/contracts</directory>
-                <directory>./src/*/Tests</directory>
-            </exclude>
-        </whitelist>
-    </filter>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" bootstrap="./vendor/autoload.php" colors="true" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd">
+  <coverage>
+    <include>
+      <directory>./src</directory>
+    </include>
+    <exclude>
+      <directory>./src/contracts</directory>
+      <directory>./src/*/Tests</directory>
+      <directory>./src/*/Testing</directory>
+    </exclude>
+  </coverage>
+  <testsuites>
+    <testsuite name="Core Test Suite">
+      <directory suffix="Test.php">./src/core/Tests</directory>
+    </testsuite>
+    <testsuite name="Doctrine Test Suite">
+      <directory suffix="Test.php">./src/doctrine/Tests</directory>
+    </testsuite>
+    <testsuite name="Mezzio Test Suite">
+      <directory suffix="Test.php">./src/mezzio/Tests</directory>
+    </testsuite>
+  </testsuites>
 </phpunit>

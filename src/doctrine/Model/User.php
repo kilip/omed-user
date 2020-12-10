@@ -11,9 +11,12 @@
 
 declare(strict_types=1);
 
-namespace Omed\User\Contracts\Util;
+namespace Omed\User\Doctrine\Model;
 
-interface EncoderInterface
+use Omed\User\Contracts\Model\UserInterface;
+use Omed\User\Contracts\Model\UserTrait;
+
+abstract class User implements UserInterface
 {
-    public function encodePassword(string $plainPassword, ?string $salt): string;
+    use UserTrait;
 }

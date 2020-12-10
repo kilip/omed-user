@@ -11,9 +11,12 @@
 
 declare(strict_types=1);
 
-namespace Omed\User\Contracts\Util;
+namespace Omed\User\Core\Util;
 
-interface EncoderInterface
+class CanonicalizerFactory
 {
-    public function encodePassword(string $plainPassword, ?string $salt): string;
+    public function __invoke(): Canonicalizer
+    {
+        return new Canonicalizer();
+    }
 }

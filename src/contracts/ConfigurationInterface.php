@@ -15,5 +15,27 @@ namespace Omed\User\Contracts;
 
 interface ConfigurationInterface
 {
-    public function getUserClass(): string;
+    /**
+     * Set email canonicalizer service id.
+     */
+    public function setEmailCanonicalizer(string $serviceId): void;
+
+    /**
+     * Get email canonicalizer service id.
+     */
+    public function getEmailCanonicalizer(): ?string;
+
+    /**
+     * Set username canonicalizer service id.
+     */
+    public function setUsernameCanonicalizer(string $serviceId): void;
+
+    /**
+     * Get username canonicalizer service id.
+     */
+    public function getUsernameCanonicalizer(): ?string;
+
+    public function setUserClass(string $userClass): void;
+
+    public function getUserClass(): ?string;
 }

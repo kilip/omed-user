@@ -11,9 +11,11 @@
 
 declare(strict_types=1);
 
-namespace Omed\User\Contracts\Util;
+namespace Omed\User\Doctrine\Contracts;
 
-interface EncoderInterface
+interface ConfigurationInterface
 {
-    public function encodePassword(string $plainPassword, ?string $salt): string;
+    public function setObjectManagerClass(string $class): void;
+
+    public function getObjectManagerClass(): ?string;
 }

@@ -11,9 +11,13 @@
 
 declare(strict_types=1);
 
-namespace Omed\User\Contracts\Util;
+use Laminas\ConfigAggregator\ConfigAggregator;
+use Omed\User;
 
-interface EncoderInterface
-{
-    public function encodePassword(string $plainPassword, ?string $salt): string;
-}
+$aggregator = new ConfigAggregator([
+    Mezzio\ConfigProvider::class,
+    DoctrineModule\ConfigProvider::class,
+    User\Mezzio\ConfigProvider::class,
+]);
+
+return $aggregator->getMergedConfig();
