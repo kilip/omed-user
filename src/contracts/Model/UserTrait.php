@@ -1,9 +1,17 @@
 <?php
 
+/*
+ * This file is part of the Omed User project.
+ *
+ * (c) Anthonius Munthi <https://itstoni.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace Omed\User\Contracts\Model;
-
 
 trait UserTrait
 {
@@ -29,6 +37,7 @@ trait UserTrait
     public function setUsername(?string $username): self
     {
         $this->username = $username;
+
         return $this;
     }
 
@@ -40,6 +49,7 @@ trait UserTrait
     public function setUsernameCanonical(?string $usernameCanonical): self
     {
         $this->usernameCanonical = $usernameCanonical;
+
         return $this;
     }
 
@@ -51,6 +61,7 @@ trait UserTrait
     public function setEmail(?string $email): self
     {
         $this->email = $email;
+
         return $this;
     }
 
@@ -62,6 +73,7 @@ trait UserTrait
     public function setEmailCanonical(?string $emailCanonical): self
     {
         $this->emailCanonical = $emailCanonical;
+
         return $this;
     }
 
@@ -73,6 +85,7 @@ trait UserTrait
     public function setSalt(?string $salt): self
     {
         $this->salt = $salt;
+
         return $this;
     }
 
@@ -84,6 +97,7 @@ trait UserTrait
     public function setPassword(?string $password): self
     {
         $this->password = $password;
+
         return $this;
     }
 
@@ -95,6 +109,7 @@ trait UserTrait
     public function setPlainPassword(?string $plainPassword): self
     {
         $this->plainPassword = $plainPassword;
+
         return $this;
     }
 }

@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Omed User project.
+ *
+ * (c) Anthonius Munthi <https://itstoni.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace Omed\User\Component\Manager;
@@ -13,11 +22,11 @@ use Omed\User\Contracts\Updater\PasswordUpdaterInterface;
 
 final class UserManager implements UserManagerInterface
 {
-    protected PasswordUpdaterInterface $passwordUpdater;
+    private PasswordUpdaterInterface $passwordUpdater;
 
-    protected CanonicalFieldsUpdaterInterface $canonicalFieldsUpdater;
+    private CanonicalFieldsUpdaterInterface $canonicalFieldsUpdater;
 
-    protected string $userClass;
+    private string $userClass;
 
     private ObjectManager $om;
 
@@ -26,20 +35,17 @@ final class UserManager implements UserManagerInterface
         PasswordUpdaterInterface $passwordUpdater,
         CanonicalFieldsUpdaterInterface $canonicalFieldsUpdater,
         string $userClass
-    )
-    {
-        $this->passwordUpdater = $passwordUpdater;
+    ) {
+        $this->passwordUpdater        = $passwordUpdater;
         $this->canonicalFieldsUpdater = $canonicalFieldsUpdater;
-        $this->userClass = $userClass;
-        $this->om = $om;
+        $this->userClass              = $userClass;
+        $this->om                     = $om;
     }
 
     public function createUser(): UserInterface
     {
         /** @var UserInterface $user */
-        $user = new $this->userClass();
-
-        return $user;
+        return new $this->userClass();
     }
 
     public function findBy(array $criteria)
@@ -79,7 +85,7 @@ final class UserManager implements UserManagerInterface
         $this->passwordUpdater->hashPassword($user);
     }
 
-    protected function getRepository(): ObjectRepository
+    private function getRepository(): ObjectRepository
     {
         return $this->om->getRepository($this->userClass);
     }
@@ -97,7 +103,7 @@ final class UserManager implements UserManagerInterface
 
         $this->om->persist($user);
 
-        if($andFlush){
+        if ($andFlush) {
             $this->om->flush();
         }
     }

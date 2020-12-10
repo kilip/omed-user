@@ -27,7 +27,8 @@
             "@phpstan",
             "@test"
         ],
-        "phpstan": "./vendor/bin/phpstan analyse",
+        "cs-fix": "php-cs-fixer fix",
+        "phpstan": "phpstan analyse",
         "psalm": "psalm --shepherd --stats",
         "test": "phpunit"
     },
@@ -37,6 +38,7 @@
     "require-dev": {
         "doctrine/mongodb-odm": "^2.1",
         "doctrine/orm": "^2.8",
+        "friendsofphp/php-cs-fixer": "^2.17",
         "jangregor/phpstan-prophecy": "^0.8.1",
         "phpspec/prophecy-phpunit": "^2.0",
         "phpstan/extension-installer": "^1.0",

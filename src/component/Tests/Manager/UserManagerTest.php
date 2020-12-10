@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Omed User project.
+ *
+ * (c) Anthonius Munthi <https://itstoni.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace Omed\User\Component\Tests\Manager;
@@ -39,11 +48,11 @@ class UserManagerTest extends TestCase
      */
     private $om;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
-        $this->passwordUpdater = $this->prophesize(PasswordUpdaterInterface::class);
+        $this->passwordUpdater  = $this->prophesize(PasswordUpdaterInterface::class);
         $this->canonicalUpdater = $this->prophesize(CanonicalFieldsUpdaterInterface::class);
-        $this->om = $this->prophesize(ObjectManager::class);
+        $this->om               = $this->prophesize(ObjectManager::class);
         $this->objectRepository = $this->prophesize(ObjectRepository::class);
 
         $this->om
@@ -71,7 +80,7 @@ class UserManagerTest extends TestCase
     public function testFindBy()
     {
         $criteria = ['foo' => 'bar'];
-        $user = $this->prophesize(UserInterface::class)->reveal();
+        $user     = $this->prophesize(UserInterface::class)->reveal();
 
         $this->objectRepository
             ->findOneBy($criteria)
@@ -87,7 +96,7 @@ class UserManagerTest extends TestCase
     public function testFindByUsername()
     {
         $username = 'test';
-        $user = $this->prophesize(UserInterface::class);
+        $user     = $this->prophesize(UserInterface::class);
 
         $this->canonicalUpdater->canonicalizeUsername($username)
             ->shouldBeCalled()
@@ -104,7 +113,7 @@ class UserManagerTest extends TestCase
     public function testFindByEmail()
     {
         $email = 'test@example.com';
-        $user = $this->prophesize(UserInterface::class)->reveal();
+        $user  = $this->prophesize(UserInterface::class)->reveal();
 
         $this->canonicalUpdater->canonicalizeMail($email)
             ->shouldBeCalled()
@@ -202,4 +211,3 @@ class UserManagerTest extends TestCase
         $this->getTarget()->save($user);
     }
 }
-

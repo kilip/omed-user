@@ -1,13 +1,20 @@
 <?php
 
+/*
+ * This file is part of the Omed User project.
+ *
+ * (c) Anthonius Munthi <https://itstoni.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace Omed\User\Component\Tests;
 
-
-use Exception;
-use Omed\User\Contracts\Model\UserTrait;
 use Omed\User\Contracts\Model\UserInterface;
+use Omed\User\Contracts\Model\UserTrait;
 
 class TestUserComponent implements UserInterface
 {
@@ -27,7 +34,7 @@ class TestUserComponent implements UserInterface
             $this->username,
             $this->email,
             $this->emailCanonical,
-            $this->id
+            $this->id,
         ]);
     }
 
@@ -45,8 +52,7 @@ class TestUserComponent implements UserInterface
             $this->username,
             $this->email,
             $this->emailCanonical,
-            $this->id,
-            ) = $data;
+            $this->id) = $data;
     }
 
     public function getId(): ?string
