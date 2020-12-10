@@ -34,7 +34,7 @@ trait UserTrait
         return $this->username;
     }
 
-    public function setUsername(?string $username): self
+    public function setUsername(string $username): self
     {
         $this->username = $username;
 
@@ -46,7 +46,7 @@ trait UserTrait
         return $this->usernameCanonical;
     }
 
-    public function setUsernameCanonical(?string $usernameCanonical): self
+    public function setUsernameCanonical(string $usernameCanonical): self
     {
         $this->usernameCanonical = $usernameCanonical;
 
@@ -58,7 +58,7 @@ trait UserTrait
         return $this->email;
     }
 
-    public function setEmail(?string $email): self
+    public function setEmail(string $email): self
     {
         $this->email = $email;
 
@@ -70,7 +70,7 @@ trait UserTrait
         return $this->emailCanonical;
     }
 
-    public function setEmailCanonical(?string $emailCanonical): self
+    public function setEmailCanonical(string $emailCanonical): self
     {
         $this->emailCanonical = $emailCanonical;
 
@@ -82,7 +82,7 @@ trait UserTrait
         return $this->salt;
     }
 
-    public function setSalt(?string $salt): self
+    public function setSalt(string $salt): self
     {
         $this->salt = $salt;
 
@@ -94,7 +94,7 @@ trait UserTrait
         return $this->password;
     }
 
-    public function setPassword(?string $password): self
+    public function setPassword(string $password): self
     {
         $this->password = $password;
 
@@ -106,7 +106,7 @@ trait UserTrait
         return $this->plainPassword;
     }
 
-    public function setPlainPassword(?string $plainPassword): self
+    public function setPlainPassword(string $plainPassword): self
     {
         $this->plainPassword = $plainPassword;
 

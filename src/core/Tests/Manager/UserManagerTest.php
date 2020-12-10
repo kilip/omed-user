@@ -11,15 +11,17 @@
 
 declare(strict_types=1);
 
-namespace Omed\User\Component\Tests\Manager;
+namespace Omed\User\Core\Tests\Manager;
 
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Persistence\ObjectRepository;
-use Omed\User\Component\Manager\UserManager;
-use Omed\User\Component\Tests\TestUserComponent;
 use Omed\User\Contracts\Model\UserInterface;
 use Omed\User\Contracts\Updater\CanonicalFieldsUpdaterInterface;
 use Omed\User\Contracts\Updater\PasswordUpdaterInterface;
+use Omed\User\Core\Manager\UserManager;
+use Omed\User\Core\Tests\TestRepository;
+use Omed\User\Core\Tests\TestUserComponent;
+use Omed\User\Core\Tests\TestUserManager;
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
@@ -47,23 +49,22 @@ class UserManagerTest extends TestCase
      * @var ObjectManager|ObjectProphecy
      */
     private $om;
+    /**
+     * @var TestRepository|ObjectProphecy
+     */
+    private $repository;
 
     protected function setUp(): void
     {
         $this->passwordUpdater  = $this->prophesize(PasswordUpdaterInterface::class);
         $this->canonicalUpdater = $this->prophesize(CanonicalFieldsUpdaterInterface::class);
-        $this->om               = $this->prophesize(ObjectManager::class);
-        $this->objectRepository = $this->prophesize(ObjectRepository::class);
-
-        $this->om
-            ->getRepository(TestUserComponent::class)
-            ->willReturn($this->objectRepository);
+        $this->repository       = $this->prophesize(TestRepository::class);
     }
 
     protected function getTarget(): UserManager
     {
-        return new UserManager(
-            $this->om->reveal(),
+        return new TestUserManager(
+            $this->repository->reveal(),
             $this->passwordUpdater->reveal(),
             $this->canonicalUpdater->reveal(),
             TestUserComponent::class
@@ -77,53 +78,36 @@ class UserManagerTest extends TestCase
         $this->assertInstanceOf(TestUserComponent::class, $result);
     }
 
-    public function testFindBy()
+    public function testFindByUsername()
     {
-        $criteria = ['foo' => 'bar'];
+        $username = 'test';
         $user     = $this->prophesize(UserInterface::class)->reveal();
 
-        $this->objectRepository
-            ->findOneBy($criteria)
+        $this->canonicalUpdater->canonicalizeUsername($username)
+            ->shouldBeCalled()
+            ->willReturn('canonicalized');
+        $this->repository->findBy(['usernameCanonical' => 'canonicalized'])
             ->shouldBeCalled()
             ->willReturn($user);
 
         $this->assertSame(
             $user,
-            $this->getTarget()->findBy($criteria)
+            $this->getTarget()->findByUsername($username)
         );
-    }
-
-    public function testFindByUsername()
-    {
-        $username = 'test';
-        $user     = $this->prophesize(UserInterface::class);
-
-        $this->canonicalUpdater->canonicalizeUsername($username)
-            ->shouldBeCalled()
-            ->willReturn('canonicalized');
-
-        $this->objectRepository
-            ->findOneBy(['usernameCanonical' => 'canonicalized'])
-            ->shouldBeCalled()
-            ->willReturn($user);
-
-        $this->getTarget()->findByUsername($username);
     }
 
     public function testFindByEmail()
     {
         $email = 'test@example.com';
-        $user  = $this->prophesize(UserInterface::class)->reveal();
+        $user     = $this->prophesize(UserInterface::class)->reveal();
 
         $this->canonicalUpdater->canonicalizeMail($email)
             ->shouldBeCalled()
             ->willReturn('canonicalized');
 
-        $this->objectRepository
-            ->findOneBy(['emailCanonical' => 'canonicalized'])
+        $this->repository->findBy(['emailCanonical' => 'canonicalized'])
             ->shouldBeCalled()
             ->willReturn($user);
-
         $this->assertSame(
             $user,
             $this->getTarget()->findByEmail($email)
@@ -132,14 +116,13 @@ class UserManagerTest extends TestCase
 
     public function testFindByUsernameOrEmailWithEmail()
     {
-        $user = $this->prophesize(UserInterface::class)->reveal();
+        $user     = $this->prophesize(UserInterface::class)->reveal();
 
         $this->canonicalUpdater->canonicalizeMail('test@example.com')
             ->shouldBeCalled()
             ->willReturn('canonicalized');
 
-        $this->objectRepository
-            ->findOneBy(['emailCanonical' => 'canonicalized'])
+        $this->repository->findBy(['emailCanonical' => 'canonicalized'])
             ->shouldBeCalled()
             ->willReturn($user);
 
@@ -158,8 +141,7 @@ class UserManagerTest extends TestCase
             ->shouldBeCalled()
             ->willReturn('canonicalized');
 
-        $this->objectRepository
-            ->findOneBy(['usernameCanonical' => 'canonicalized'])
+        $this->repository->findBy(['usernameCanonical' => 'canonicalized'])
             ->shouldBeCalled()
             ->willReturn($user);
 
@@ -167,6 +149,7 @@ class UserManagerTest extends TestCase
             $user,
             $this->getTarget()->findByUsernameOrEmail('username')
         );
+
     }
 
     public function testUpdateCanonicalFields()
@@ -189,25 +172,5 @@ class UserManagerTest extends TestCase
             ->shouldBeCalled();
 
         $this->getTarget()->updatePassword($user);
-    }
-
-    public function testDeleteUser()
-    {
-        $user = $this->prophesize(UserInterface::class)->reveal();
-
-        $this->om->remove($user)->shouldBeCalled();
-        $this->om->flush()->shouldBeCalled();
-
-        $this->getTarget()->deleteUser($user);
-    }
-
-    public function testSave()
-    {
-        $user = $this->prophesize(UserInterface::class)->reveal();
-
-        $this->om->persist($user)->shouldBeCalled();
-        $this->om->flush()->shouldBeCalled();
-
-        $this->getTarget()->save($user);
     }
 }

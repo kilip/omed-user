@@ -11,27 +11,22 @@
 
 declare(strict_types=1);
 
-namespace Omed\User\Component\Manager;
+namespace Omed\User\Core\Manager;
 
-use Doctrine\Persistence\ObjectManager;
-use Doctrine\Persistence\ObjectRepository;
 use Omed\User\Contracts\Manager\UserManagerInterface;
 use Omed\User\Contracts\Model\UserInterface;
 use Omed\User\Contracts\Updater\CanonicalFieldsUpdaterInterface;
 use Omed\User\Contracts\Updater\PasswordUpdaterInterface;
 
-final class UserManager implements UserManagerInterface
+abstract class UserManager implements UserManagerInterface
 {
-    private PasswordUpdaterInterface $passwordUpdater;
+    protected PasswordUpdaterInterface $passwordUpdater;
 
-    private CanonicalFieldsUpdaterInterface $canonicalFieldsUpdater;
+    protected CanonicalFieldsUpdaterInterface $canonicalFieldsUpdater;
 
-    private string $userClass;
-
-    private ObjectManager $om;
+    protected string $userClass;
 
     public function __construct(
-        ObjectManager $om,
         PasswordUpdaterInterface $passwordUpdater,
         CanonicalFieldsUpdaterInterface $canonicalFieldsUpdater,
         string $userClass
@@ -39,18 +34,11 @@ final class UserManager implements UserManagerInterface
         $this->passwordUpdater        = $passwordUpdater;
         $this->canonicalFieldsUpdater = $canonicalFieldsUpdater;
         $this->userClass              = $userClass;
-        $this->om                     = $om;
     }
 
     public function createUser(): UserInterface
     {
-        /** @var UserInterface $user */
         return new $this->userClass();
-    }
-
-    public function findBy(array $criteria)
-    {
-        return $this->getRepository()->findOneBy($criteria);
     }
 
     public function findByUsername(string $username): ?UserInterface
@@ -83,28 +71,5 @@ final class UserManager implements UserManagerInterface
     public function updatePassword(UserInterface $user): void
     {
         $this->passwordUpdater->hashPassword($user);
-    }
-
-    private function getRepository(): ObjectRepository
-    {
-        return $this->om->getRepository($this->userClass);
-    }
-
-    public function deleteUser(UserInterface $user): void
-    {
-        $this->om->remove($user);
-        $this->om->flush();
-    }
-
-    public function save(UserInterface $user, bool $andFlush = true): void
-    {
-        $this->updateCanonicalFields($user);
-        $this->updatePassword($user);
-
-        $this->om->persist($user);
-
-        if ($andFlush) {
-            $this->om->flush();
-        }
     }
 }

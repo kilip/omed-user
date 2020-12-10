@@ -11,15 +11,12 @@
 
 declare(strict_types=1);
 
-namespace Omed\User\Component\Tests;
+namespace Omed\User\Core\Tests;
 
-use Omed\User\Contracts\Model\UserInterface;
-use Omed\User\Contracts\Model\UserTrait;
+use Omed\User\Core\Model\User;
 
-class TestUserComponent implements UserInterface
+class TestUserComponent extends User
 {
-    use UserTrait;
-
     protected ?string $id = null;
 
     /**

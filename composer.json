@@ -15,6 +15,7 @@
     },
     "autoload": {
         "psr-4": {
+            "Omed\\User\\Core\\": "./src/core",
             "Omed\\User\\Component\\": "./src/component",
             "Omed\\User\\Contracts\\": "./src/contracts",
             "Omed\\User\\Doctrine\\": "./src/doctrine",
