@@ -21,6 +21,7 @@ class BcryptEncoder implements EncoderInterface
     public function encodePassword(string $plainPassword, ?string $salt): string
     {
         $bcrypt = new Bcrypt();
+
         return $bcrypt->create($plainPassword);
     }
 }

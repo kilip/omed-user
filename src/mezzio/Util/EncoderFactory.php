@@ -16,7 +16,6 @@ namespace Omed\User\Mezzio\Util;
 use Omed\User\Contracts\Model\UserInterface;
 use Omed\User\Contracts\Util\EncoderFactoryInterface;
 use Omed\User\Contracts\Util\EncoderInterface;
-use Omed\User\Mezzio\Util\BcryptEncoder;
 
 class EncoderFactory implements EncoderFactoryInterface
 {
